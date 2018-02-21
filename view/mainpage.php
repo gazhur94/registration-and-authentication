@@ -26,23 +26,20 @@
       <form method="POST">
       <div class="text-center mb-6">
         <img class="mb-4" src="https://slack-files2.s3-us-west-2.amazonaws.com/avatars/2016-02-26/23343984289_ddecd105aae271e99656_512.png" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Введіть свої дані, щоб увійти на сайт</h1>
-      </div>
-      
-      <div class="form-label-group">
-        <input type="text" id="inputEmail" value="<?php echo @$_POST['login']; ?>" class="form-control" placeholder="Логін" required="" autofocus="" name="login">
-        
-      </div>
-      <br></br>
-      <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required="" name = "password">
-        
-      </div>
 
-      <br></br>
-      <button class="btn btn-lg btn-primary btn-block" name="do_login" type="submit">Увійти</button>
-      <h6 style="color:red"><?php echo $error?></h6>
-      <h6 >Якщо ви новий користувач, то <a href="/signup">зареєстуйтесь</a></h6>
+        <?php if (isset( $_SESSION['logged_user'])): ?>
+          <h1 class="h3 mb-3 font-weight-normal">Ви авторизовані під іменем <?php echo $_SESSION['logged_user'] ?></h1>
+          <button class="btn btn-lg btn-primary btn-block" name="logout" type="submit">Вийти</button>
+        <?php else: ?>
+
+          <h1 class="h3 mb-3 font-weight-normal">Ви не авторизовані</h1>
+          <h6><a href="/login">Увійти</a></h6>
+          <h6><a href="/signup">Зареєстуватись</a></h6>
+        <?php endif; ?> 
+
+
+      </div>
+     
   
     </form>
   </div>

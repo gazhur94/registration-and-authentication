@@ -79,11 +79,21 @@ class Users
                 return 'ok';
             }
         }
-      
 
         
     }
 
+    public static function getUserId($username)
+    {
+        $pdo = db::getConnection();
+
+        $sql = "SELECT id FROM users WHERE username='$username'";
+        $result = $pdo->prepare($sql);
+        $result->execute();
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $current = $result->fetch();
+        return $current;
+    }
 
 
 }

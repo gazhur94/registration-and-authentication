@@ -2,6 +2,9 @@
 return array
 (
     'login' => 'logIn/index',
-    'signup' => 'signUp/index'
+    'success' => 'success/index',
+    'signup' => 'signUp/index',
+    'main' => 'mainpage/index'
+    
 
 );

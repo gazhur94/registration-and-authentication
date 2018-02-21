@@ -11,70 +11,73 @@ class SignUpController
     public function actionIndex()
     {
          
+        if (isset( $_SESSION['logged_user']))
+        {
+            header('Location: main');
+        }
+        else
+        {
+            $data = $_POST;
+            if (isset($data['do_signup']))
+            {
+                $errors = array();
 
-         $data = $_POST;
-         if (isset($data['do_signup']))
-         {
-             $errors = array();
+                if (trim($data['login'])=='')
+                {
+                    $errors = 'Введіть логін';
+                }
+                
+                if ($data['password']=='')
+                {
+                    $errors = 'Введіть пароль';
+                }
 
-             if (trim($data['login'])=='')
-             {
-                 $errors = 'Введіть логін';
-             }
-             
-             if ($data['password']=='')
-             {
-                 $errors = 'Введіть пароль';
-             }
+                if ($data['password'] != $data['password_2'])
+                {
+                    $errors = 'Паролі не співпадають';
+                }
 
-             if ($data['password'] != $data['password_2'])
-             {
-                 $errors = 'Паролі не співпадають';
-             }
+                if (trim($data['email'])=='')
+                {
+                    $errors = 'Введіть емейл';
+                }
 
-             if (trim($data['email'])=='')
-             {
-                 $errors = 'Введіть емейл';
-             }
+                $dublUser = Users::isDublUsername($data['login']);
 
-             $dublUser = Users::isDublUsername($data['login']);
+                if ($dublUser != NULL)
+                {
+                    $errors = $dublUser;
+                }
 
-             if ($dublUser != NULL)
-             {
-                 $errors = $dublUser;
-             }
+                $dublEmail = Users::isDublEmail($data['email']);
 
-             $dublEmail = Users::isDublEmail($data['email']);
+                if ($dublEmail != NULL)
+                {
+                    $errors = $dublEmail;
+                }
+                
 
-             if ($dublEmail != NULL)
-             {
-                 $errors = $dublEmail;
-             }
-             
+                if(empty($errors))
+                {
+                    users::InsertData($data['login'],$data['email'],password_hash($data['password'], PASSWORD_DEFAULT));
 
-             if(empty($errors))
-             {
-                users::InsertData($data['login'],$data['email'],password_hash($data['password'], PASSWORD_DEFAULT));
-
-                echo 'Ви зареєстровані';
-             }
-            //  else
-            //  {
-            //     $_SESSION['errors'] = $errors;
-            //  }
-             
-         }
-         if (empty($errors))
-         {
+                    header('Location: success');
+                }
+               
+                
+            }
+            if (empty($errors))
+            {
+                
+                helpers::render("signUp", ["error" => ""]);
+            }
+            else
+            {
+                
+                helpers::render("signUp", ["error" => "$errors"]);
             
-            helpers::render("signUp", ["error" => ""]);
-         }
-         else
-         {
-            
-            helpers::render("signUp", ["error" => "$errors"]);
-           
-         }
+            }
+        }
          
     }
 
