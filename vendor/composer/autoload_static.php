@@ -21,9 +21,13 @@ class ComposerStaticInit8d2c61eb68e284a3251badf19ad705e5
     );
 
     public static $classMap = array (
+        'authorization\\components\\generator' => __DIR__ . '/../..' . '/components/generator.php',
         'authorization\\config\\db' => __DIR__ . '/../..' . '/config/db.php',
         'authorization\\controllers\\LogInController' => __DIR__ . '/../..' . '/controllers/LogInController.php',
+        'authorization\\controllers\\MainpageController' => __DIR__ . '/../..' . '/controllers/MainpageController.php',
         'authorization\\controllers\\SignUpController' => __DIR__ . '/../..' . '/controllers/SignUpController.php',
+        'authorization\\controllers\\SuccessController' => __DIR__ . '/../..' . '/controllers/SuccessController.php',
+        'authorization\\models\\Current_sessions' => __DIR__ . '/../..' . '/models/Current_sessions.php',
         'authorization\\models\\Users' => __DIR__ . '/../..' . '/models/Users.php',
         'authorization\\view\\helpers' => __DIR__ . '/../..' . '/view/helpers.php',
     );

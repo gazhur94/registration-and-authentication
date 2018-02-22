@@ -42,6 +42,7 @@
       <br></br>
       <button class="btn btn-lg btn-primary btn-block" name="do_login" type="submit">Увійти</button>
       <h6 style="color:red"><?php echo $error?></h6>
+      
       <h6 >Якщо ви новий користувач, то <a href="/signup">зареєстуйтесь</a></h6>
   
     </form>

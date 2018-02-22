@@ -6,9 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'authorization\\components\\generator' => $baseDir . '/components/generator.php',
     'authorization\\config\\db' => $baseDir . '/config/db.php',
     'authorization\\controllers\\LogInController' => $baseDir . '/controllers/LogInController.php',
+    'authorization\\controllers\\MainpageController' => $baseDir . '/controllers/MainpageController.php',
     'authorization\\controllers\\SignUpController' => $baseDir . '/controllers/SignUpController.php',
+    'authorization\\controllers\\SuccessController' => $baseDir . '/controllers/SuccessController.php',
+    'authorization\\models\\Current_sessions' => $baseDir . '/models/Current_sessions.php',
     'authorization\\models\\Users' => $baseDir . '/models/Users.php',
     'authorization\\view\\helpers' => $baseDir . '/view/helpers.php',
 );
