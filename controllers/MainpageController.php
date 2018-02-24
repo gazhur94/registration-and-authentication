@@ -15,9 +15,9 @@ class MainpageController
         if ((isset($_POST['logout'])))
         {
             
-            unset($_SESSION['logged_user']);
+            setcookie('hash', $hash, 1);
+            setcookie('user', $_SESSION['logged_user'], 1);
             unset($_SESSION['user_id']);
-            unset($_COOKIE['hash']);
             Current_sessions::deleteSession($_SESSION['userId']);
              header('Location: login');
             

@@ -32,7 +32,7 @@ use authorization\models\Current_sessions; ?>
 
         <?php if (Current_sessions::isUserLogged() == TRUE): ?>
         
-          <h1 class="h3 mb-3 font-weight-normal">Ви авторизовані під іменем <?php echo $_SESSION['logged_user'] ?></h1>
+          <h1 class="h3 mb-3 font-weight-normal">Ви авторизовані під іменем <?php echo $_COOKIE['user'] ?></h1>
           <button class="btn btn-lg btn-primary btn-block" name="logout" type="submit">Вийти</button>
         <?php else: ?>
         

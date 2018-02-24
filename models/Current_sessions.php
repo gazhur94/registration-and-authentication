@@ -33,14 +33,19 @@ class Current_sessions
     public static function isUserLogged()
     {
         if (isset($_SESSION['userId']))
-        {           
+        {    
+              
             $salt  = self::getSalt($_SESSION['userId']);
-            if (isset($_SESSION['logged_user']) )
-            {             
+            
+            if (isset($_COOKIE['user']) )
+            {    
+                  
                 if (password_verify(($_SESSION['logged_user'].$salt["salt"]), $_COOKIE['hash']))
                 {
+                      
                     return TRUE;
                 }
+               
             }
                   
         }

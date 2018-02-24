@@ -21,6 +21,7 @@ class LogInController
 
         $_SESSION['logged_user'] = $data['login'];
         setcookie('hash', $hash, time()+3600);
+        setcookie('user', $_SESSION['logged_user'], time()+3600);
         
     }
 
@@ -29,6 +30,7 @@ class LogInController
        
         if (Current_sessions::isUserLogged() == TRUE)
             {    
+                
                 header('Location: main');
             }
         
@@ -36,7 +38,8 @@ class LogInController
         {
             $data = $_POST;
             if (isset($data['do_login']))
-            {        
+            {   
+                //var_dump(Current_sessions::isUserLogged());     
                 $errors = array();
                 $isLogin = Users::doLogIn($data['login'],$data['password']);
                 
@@ -44,6 +47,8 @@ class LogInController
                 {
                   
                    self::createAndInsertLoggedUserData();
+                   header('Location: main');
+
 
                 }
                 else

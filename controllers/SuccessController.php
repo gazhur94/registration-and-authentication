@@ -10,7 +10,7 @@ class SuccessController
     public function actionIndex()
     {   
         
-        if (isset( $_SESSION['logged_user']))
+        if (isset($_COOKIE['user']))
         {
             header('Location: main');
         }
