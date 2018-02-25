@@ -27,20 +27,31 @@ class Current_sessions
         $result->execute();
         $result->setFetchMode(PDO::FETCH_ASSOC);
         $current = $result->fetch();
+        
         return $current;
     }
    
     public static function isUserLogged()
     {
-        if (isset($_SESSION['userId']))
-        {    
-              
+        if (!isset($_SESSION['userId']))
+        {
+            
+            if (isset($_COOKIE['user']))
+            {
+                $userId = Users::getUserId($_COOKIE['user']);
+                $_SESSION['userId'] = $userId['id'];
+                self::isUserLogged();
+            }
+            
+        }
+        else
+        {
+             
             $salt  = self::getSalt($_SESSION['userId']);
             
             if (isset($_COOKIE['user']) )
-            {    
-                  
-                if (password_verify(($_SESSION['logged_user'].$salt["salt"]), $_COOKIE['hash']))
+            {     
+                if (password_verify(($_COOKIE['user'].$salt["salt"]), $_COOKIE['hash']))
                 {
                       
                     return TRUE;

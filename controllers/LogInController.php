@@ -39,7 +39,7 @@ class LogInController
             $data = $_POST;
             if (isset($data['do_login']))
             {   
-                //var_dump(Current_sessions::isUserLogged());     
+                    
                 $errors = array();
                 $isLogin = Users::doLogIn($data['login'],$data['password']);
                 
