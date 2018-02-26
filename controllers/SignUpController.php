@@ -80,6 +80,20 @@ class SignUpController
         }
          
     }
+    public function actionSuccess()
+    {   
+        
+        if (isset($_COOKIE['user']))
+        {
+            header('Location: main');
+        }
+        else
+        {
+            helpers::render("success");
+        }
+
+        
+    }
 
 }
 
