@@ -26,14 +26,19 @@ class FirstMigration extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change()
+    public function up()
     {
         $users = $this->table('users');
 
-        $users->addColumn('username','string',array('limit'=>45))
+        $users->addColumn('username','string',array('limit'=>46))
                  ->addColumn('email','string',array('limit'=>45))
                  ->addColumn('password','text')
                  ->addIndex('username',array('unique'=>TRUE))
                  ->create();
     }
+    public function down()
+    {
+        $this->droptable('users');
+    }
+
 }

@@ -3,7 +3,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class CreateUsersSessions extends AbstractMigration
+class CreateUsers extends AbstractMigration
 {
     /**
      * Change Method.
@@ -26,19 +26,18 @@ class CreateUsersSessions extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change()
+    public function up()
     {
-        $current_sessions = $this->table('current_sessions');
+        $users = $this->table('users');
 
-        $current_sessions->addColumn('user_id','integer')
-                 ->addColumn('ip','string',array('limit'=>45))
-                 ->addColumn('salt','string',array('limit'=>45))
-                 ->addColumn('hash','text')
-                 ->addIndex('user_id',array('unique'=>TRUE))
+        $users->addColumn('username','string',array('limit'=>46))
+                 ->addColumn('email','string',array('limit'=>45))
+                 ->addColumn('password','text')
+                 ->addIndex('username',array('unique'=>TRUE))
                  ->create();
     }
     public function down()
     {
-        $this->droptable('current_sessions');
+        $this->droptable('users');
     }
 }
