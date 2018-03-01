@@ -11,7 +11,7 @@ class SignUpController
     public function actionIndex()
     {
        
-        if (isset( $_COOKIE['user']))
+        if (isset( $_SESSION['logged_user']))
         {
             header('Location: main');
         }
@@ -83,7 +83,7 @@ class SignUpController
     public function actionSuccess()
     {   
         
-        if (isset($_COOKIE['user']))
+        if (isset($_SESSION['logged_user']))
         {
             header('Location: main');
         }

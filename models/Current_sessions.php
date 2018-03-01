@@ -9,12 +9,12 @@ use PDO;
 
 class Current_sessions
 {
-    public static function insertLoggedUser($userId,$ip,$salt,$hash)
+    public static function insertLoggedUser($userId,$ip,$hash)
     {
         $pdo = db::getConnection();
         
-        $sql = "INSERT INTO current_sessions (`user_id`,`ip`, `salt`,`hash`)
-                VALUES('$userId','$ip','$salt','$hash')";
+        $sql = "INSERT INTO current_sessions (`user_id`,`ip`,`hash`)
+                VALUES('$userId','$ip','$hash')";
         $pdo->exec($sql);
     }
 
@@ -30,35 +30,35 @@ class Current_sessions
         
         return $current;
     }
+
+    public static function getUserId($hash)
+    {
+        $pdo = db::getConnection();
+
+        $sql = "SELECT user_id FROM current_sessions WHERE hash='$hash'";
+        $result = $pdo->prepare($sql);
+        $result->execute();
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $current = $result->fetch();
+        
+        return $current;
+    }
+
    
     public static function isUserLogged()
     {
-        if (!isset($_SESSION['userId']))
+   
+        if (isset($_COOKIE['hash']))
         {
+            $userId = self::getUserId($_COOKIE['hash']);
             
-            if (isset($_COOKIE['user']))
+            if ($userId != NULL)
             {
-                $userId = Users::getUserId($_COOKIE['user']);
-                $_SESSION['userId'] = $userId['id'];
-                self::isUserLogged();
+                $username = Users::getUsername($userId['user_id']);
+                $_SESSION['logged_user'] = $username['username'];
+                return TRUE;
             }
-            
-        }
-        else
-        {
-             
-            $salt  = self::getSalt($_SESSION['userId']);
-            
-            if (isset($_COOKIE['user']) )
-            {     
-                if (password_verify(($_COOKIE['user'].$salt["salt"]), $_COOKIE['hash']))
-                {
-                      
-                    return TRUE;
-                }
-               
-            }
-                  
+
         }
     }
     public static function deleteSession($userId)

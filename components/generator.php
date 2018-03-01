@@ -4,7 +4,7 @@ namespace authorization\components;
 
 class generator
 {
-    public static function generateSalt()
+    public static function generateHash()
     {
     $arr = array('a','b','c','d','e','f',
                 'g','h','i','j','k','l',
@@ -22,7 +22,7 @@ class generator
                 '{','}','`','~');
     
     $pass = "";
-    for($i = 0; $i < 9; $i++)
+    for($i = 0; $i < 32; $i++)
     {
         
         $index = rand(0, count($arr) - 1);

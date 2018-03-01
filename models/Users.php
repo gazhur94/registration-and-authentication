@@ -95,6 +95,18 @@ class Users
         return $current;
     }
 
+    public static function getUsername($userId)
+    {
+        $pdo = db::getConnection();
+
+        $sql = "SELECT username FROM users WHERE id='$userId'";
+        $result = $pdo->prepare($sql);
+        $result->execute();
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $current = $result->fetch();
+        return $current;
+    }
+
     
 
 
