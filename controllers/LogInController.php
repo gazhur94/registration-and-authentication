@@ -15,11 +15,12 @@ class LogInController
         $userId = Users::getUserId($data['login']);
         $_SESSION['userId'] = $userId['id'];
         $ip = $_SERVER['REMOTE_ADDR'];
-        $hash = generator::generateHash();
-        Current_sessions::insertLoggedUser($userId['id'],$ip,$hash);
+        $crypto = new generator;
+        
+        Current_sessions::insertLoggedUser($userId['id'],$ip,$crypto->hash);
 
         $_SESSION['logged_user'] = $data['login'];
-        setcookie('hash', $hash, time()+3600);
+        setcookie('hash', $crypto->hash, time()+3600);
         
     }
 

@@ -4,7 +4,12 @@ namespace authorization\components;
 
 class generator
 {
-    public static function generateHash()
+    public function __construct()
+    {
+        $this->hash=self::generateHash();
+        
+    }
+    private static function generateHash()
     {
     $arr = array('a','b','c','d','e','f',
                 'g','h','i','j','k','l',
@@ -29,5 +34,6 @@ class generator
         $pass .= $arr[$index];
     }
     return $pass;
+
     }
 }
