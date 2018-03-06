@@ -20,7 +20,7 @@ class LogInController
         Current_sessions::insertLoggedUser($userId['id'],$ip,$crypto->hash);
 
         $_SESSION['logged_user'] = $data['login'];
-        setcookie('hash', $crypto->hash, time()+3600);
+        setcookie('hash', $crypto->hash, time()+604800);
         
     }
 

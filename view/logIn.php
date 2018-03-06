@@ -30,7 +30,7 @@
       </div>
       
       <div class="form-label-group">
-        <input type="text" id="inputEmail" value="<?php echo @$_POST['login']; ?>" class="form-control" placeholder="Логін" required="" autofocus="" name="login">
+        <input type="text" id="inputlogin" value="<?php echo @$_POST['login']; ?>" class="form-control" placeholder="Логін" required="" autofocus="" name="login">
         
       </div>
       <br></br>
